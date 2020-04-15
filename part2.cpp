@@ -25,18 +25,25 @@ void bandwidth()
 		if(n==1)
 		{
 			// Noiseless Channel: Nyquist Bit Rate
-			// Bitrate = 2 * Bandwidth * log2(L)
-			// Bandwidth is Bandwidth of the channel
-			// BitRate is the bit rate in bits per second (Maximum Bitrate)
-			
+
 			ll levels,bitrate;			
 			cout<<"Enter the Bitrate of the Noiseless Channel in bps : ";
 			cin>>bitrate;
 
 			cout<<"Enter the number of signal levels in the signal that noiseless channel is transmitting : ";
 			cin>>levels;
+
 			
+			// Bitrate = 2 * Bandwidth * log2(L)
+			
+			// Bandwidth is Bandwidth of the channel
+			// BitRate is the bit rate in bits per second (Maximum Bitrate)
+			// L is the number of signal levels used to represent data
+						
 			ll bw = (bitrate / ((float)2.0 * log2(levels)));
+
+
+
 			cout<<"--------------------------------------------------------------------------------\n";
 			cout<<"Bandwidth of Noiseless Channel : "<<bw<<" Hz\n";
 			cout<<"--------------------------------------------------------------------------------\n";
@@ -44,6 +51,7 @@ void bandwidth()
 		}
 		else if(n == 2)
 		{
+			//Noisy Channel: Shannon's Capacity
 			
 			ll capacity,SNR;
 				
@@ -53,7 +61,15 @@ void bandwidth()
 			cout<<"Enter the SNR (signal-to-noise ratio) value : ";
 			cin>>SNR;
 			
+			//Capacity = Bandwidth * log2(1 + SNR);
+			
+			//Bandwidth is the bandwidth of the channel(Hz)
+			//Capacity is the Capacity of the channel in bits per second
+			
+			
 			float bw = capacity/((float) log2(1+SNR));
+			
+			
 			cout<<"--------------------------------------------------------------------------------\n";
 			cout<<"Bandwidth of the noisy channel is : "<<bw<<" Hz"<<endl;
 			cout<<"--------------------------------------------------------------------------------\n";
@@ -62,6 +78,7 @@ void bandwidth()
 		else
 		{
 			cout<<"Error:Invalid Input\nOnly 1 and 2 are allowed\n";
+			return;
 		}
 		
 }
@@ -82,7 +99,9 @@ void latency()
 	cout<<"What is the propagation speed in m/s? (2.4 * 10^8 m/s -> light speed)\n";
 	cin>>prop_speed;   
 	
+	//Propagation time = Distance / Propagation speed
 	float prop_time = ((dist * 1000)/((float) prop_speed));
+	
 	cout<<"Propagation Time : "<<prop_time*1000.0<<" ms"<<endl;
 	
 	
@@ -96,10 +115,14 @@ void latency()
 	cout<<"Enter the Bandwidth of the channel in Gbps: ";
 	cin>>bw;
 	
+	
+	//Transmission time = message / Bandwidth
 	tr_time = ((msg_size*1000*8)/((float)(bw * 1e9)));
+	
+	
 	cout<<"Transmission time : "<<(tr_time*1000.0)<<" ms\n";
 	
-	//queuing time
+	//queuing time and processing delay
 	float q_time,prc_delay;
 	cout<<"Enter the Queuing time and processing delay of the network in ms :\n";
 	cin>>q_time>>prc_delay;
@@ -121,8 +144,7 @@ void latency()
 
 void throughput()
 {
-	//Measure of how fast we can actually send data through a
-	//network
+	//Measure of how fast we can actually send data through a network
 	
 	cout<<"Enter the Bandwidth (in Mbps) of the network : ";
 	ll bw;cin>>bw;
@@ -130,6 +152,7 @@ void throughput()
 	ll fpm;cin>>fpm;
 	cout<<"Enter average number of bits in each frame : ";
 	ll bits;cin>>bits;
+	
 	float thpt = ((fpm*bits)/((float)60.0));
 
 	cout<<"--------------------------------------------------------------------------------\n";
@@ -157,9 +180,8 @@ void solve()
 					break;
 			case 3: throughput();
 					break;
-			default:
-					cout<<"Exiting the program...\n";
-					return;
+			default: cout<<"Exiting the program...\n";
+					 return;
 		}
 		
 	}
