@@ -15,8 +15,7 @@ typedef long long int ll;
 #endif
 
 
-//Calculate bandwidth based on either nyquist or shannon,
-//latency & throughput.
+//Calculate bandwidth based on either nyquist or shannon,latency & throughput.
 
 void bandwidth()
 {
@@ -31,16 +30,17 @@ void bandwidth()
 			// BitRate is the bit rate in bits per second (Maximum Bitrate)
 			
 			ll levels,bitrate;			
-			cout<<"Enter the Bitrate of the Noiseless Channel in bps\n";
+			cout<<"Enter the Bitrate of the Noiseless Channel in bps : ";
 			cin>>bitrate;
 
-			cout<<"Enter the number of signal levels in the signal that noiseless channel is transmitting\n";
+			cout<<"Enter the number of signal levels in the signal that noiseless channel is transmitting : ";
 			cin>>levels;
 			
 			ll bw = (bitrate / ((float)2.0 * log2(levels)));
-			
-			cout<<"Bandwidth: "<<bw<<" Hz\n";
-			
+			cout<<"--------------------------------------------------------------------------------\n";
+			cout<<"Bandwidth of Noiseless Channel : "<<bw<<" Hz\n";
+			cout<<"--------------------------------------------------------------------------------\n";
+
 		}
 		else if(n == 2)
 		{
@@ -54,9 +54,10 @@ void bandwidth()
 			cin>>SNR;
 			
 			float bw = capacity/((float) log2(1+SNR));
-			
+			cout<<"--------------------------------------------------------------------------------\n";
 			cout<<"Bandwidth of the noisy channel is : "<<bw<<" Hz"<<endl;
-		
+			cout<<"--------------------------------------------------------------------------------\n";
+
 		}
 		else
 		{
@@ -123,16 +124,46 @@ void throughput()
 	//Measure of how fast we can actually send data through a
 	//network
 	
-	cout<<"Enter the Bandwidth (in Mbps) of the network\n";
+	cout<<"Enter the Bandwidth (in Mbps) of the network : ";
 	ll bw;cin>>bw;
-	cout<<"Enter the actual data that can be passed through this link, in frames per minute\n";
+	cout<<"Enter the actual data that can be passed through this link, in frames per minute : ";
 	ll fpm;cin>>fpm;
-	cout<<"Enter average number of bits in each frame\n";
+	cout<<"Enter average number of bits in each frame : ";
 	ll bits;cin>>bits;
 	float thpt = ((fpm*bits)/((float)60.0));
+
+	cout<<"--------------------------------------------------------------------------------\n";
 	cout<<"Actual Bandwidth of the network : "<<bw<<" Mbps"<<endl;
 	cout<<"Throughput : "<<(thpt/(float)1e6)<<" Mbps"<<endl;
+	cout<<"--------------------------------------------------------------------------------\n";
 	
+}
+
+void solve()
+{
+	
+	
+	while(1)
+	{
+		cout<<"Calculate:\n1.Bandwidth of the Channel\n2.Latency\n3.Throughput\n4.Exit\n";
+		cout<<"Enter : ";
+	
+		ll q;cin>>q;
+		switch(q)
+		{
+			case 1: bandwidth();
+					break;
+			case 2: latency();
+					break;
+			case 3: throughput();
+					break;
+			default:
+					cout<<"Exiting the program...\n";
+					return;
+		}
+		
+	}
+		
 }
 
 int main()
@@ -140,10 +171,9 @@ int main()
     //ios::sync_with_stdio(false); 
     //cin.tie(nullptr);
 
+	
+	solve();
 
-	bandwidth();
-	latency();
-	throughput();
 
     return 0;
 }
