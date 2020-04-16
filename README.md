@@ -11,3 +11,5 @@ Archit Nitin Latkar 1MS18CS027
 #Steps To Run Program
 1. compile the file main_function.cpp using the command g++ mainfunction.cpp  you can specify an output file
 2. ./ouputfilename . if no output file is specified the ./a.out
+
+complete.mp4 is the video recording for the code
